@@ -100,8 +100,6 @@ public class FKIndexGenerator extends JDialog implements ActionListener {
         dbDriver = new JTextField(30);
         indexNameTemplate = new JTextField(30);
         
-        indexNameTemplate.setText("[table-name]I{index}");
-        
         getContentPane().setLayout(new BorderLayout());;
         getContentPane().add(UIUtils.buildEntryPanel(labels, new JComponent[] {loadInfo, dbDriver, dbUrl, schema, username, password, indexNameTemplate}), BorderLayout.NORTH);
         getContentPane().add(new JScrollPane(sql = new JTextArea(10, 80)), BorderLayout.CENTER);
@@ -457,7 +455,7 @@ public class FKIndexGenerator extends JDialog implements ActionListener {
             dbUrl.setText(node.get(Constants.DATABASE_URL, ""));
             username.setText(node.get(Constants.DATABASE_USER, ""));
             schema.setText(node.get(Constants.DATABASE_SCHEMA, ""));
-            indexNameTemplate.setText(node.get(Constants.INDEX_NAME_TEMPLATE, ""));
+            indexNameTemplate.setText(node.get(Constants.INDEX_NAME_TEMPLATE, "[table-name]I{index}"));
 
             setBounds(left, top, width, height);
     
