@@ -94,8 +94,20 @@ public class ForeignKeyReference implements Comparable <ForeignKeyReference> {
 			}
 			
 			buf.append(")");
-			
-			createIndexString = buf.toString();
+
+            
+            int pos = indexName.indexOf(".");
+            int len = indexName.length();
+            
+            if (pos > -1) {
+                len = (len - (pos+1));
+            }
+            
+            if (len > 30) {
+                createIndexString = "*[" + indexName.length() + "]" + buf.toString();
+            } else {
+                createIndexString = buf.toString();
+            }
 		}
 		
 		return createIndexString;
@@ -105,8 +117,12 @@ public class ForeignKeyReference implements Comparable <ForeignKeyReference> {
 		StringBuilder retval = new StringBuilder(128);
 		retval.append(schemaName.toUpperCase());
 		retval.append(".");
-		retval.append(indexNameTemplate.replace("[table-name]", tableName).replace("{index}", "" + indx));
-		return retval.toString();
+        
+        String nm = indexNameTemplate.replace("[table-name]", tableName).replace("{index}", "" + indx);
+
+        retval.append(nm);
+        
+        return retval.toString();
 	}
 
 	public String getIndexName() {
