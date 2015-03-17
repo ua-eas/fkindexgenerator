@@ -104,7 +104,7 @@ public class ForeignKeyReference implements Comparable <ForeignKeyReference> {
             }
             
             if (len > 30) {
-                createIndexString = "*[" + indexName.length() + "]" + buf.toString();
+                createIndexString = "*[" + (indexName.length()-(pos+1)) + "]" + buf.toString();
             } else {
                 createIndexString = buf.toString();
             }
